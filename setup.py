@@ -8,8 +8,8 @@ setup(name='openbmp-mrt',
       author='Tim Evens',
       author_email='tim@openbmp.org',
       url='',
-      data_files=[('etc', ['src/etc/openbmp-mrt.yml'])],
-      package_dir={'openbmp': 'src/site-packages/openbmp', 'openbmp.mrt': 'src/site-packages/openbmp/mrt'},
-      packages=['openbmp', 'openbmp.mrt'],
-      scripts=['src/bin/openbmp-mrt']
+      data_files=[('etc', ['src/etc/openbmp-mrt2bmp.yml'])],
+      package_dir={'openbmp': 'src/site-packages/openbmp', 'openbmp.mrt2bmp': 'src/site-packages/openbmp/mrt2bmp'},
+      packages=['openbmp', 'openbmp.mrt2bmp'],
+      scripts=['src/bin/openbmp-mrt2bmp']
      )
