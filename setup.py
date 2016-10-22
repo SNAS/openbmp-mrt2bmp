@@ -13,3 +13,4 @@ setup(name='openbmp-mrt',
       packages=['openbmp', 'openbmp.mrt2bmp'],
       scripts=['src/bin/openbmp-mrt2bmp']
      )
+
