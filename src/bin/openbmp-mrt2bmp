@@ -13,11 +13,14 @@ import getopt
 import yaml
 import logging
 from mrtparse import *
+import time
 import signal
 from multiprocessing import Queue, Manager
 
 from openbmp.mrt2bmp.RouteDataSynchronizer import RouteDataSynchronizer
 from openbmp.mrt2bmp.logger import LoggerThread
+from openbmp.mrt2bmp.MrtParser import RouteViewsProcessor
+from openbmp.mrt2bmp.CollectorSender import BMPWriter
 
 
 # Root logger
@@ -58,24 +61,6 @@ def load_config(cfg_filename, LOG):
 
     try:
         cfg = yaml.load(file(cfg_filename, 'r'))
-
-        # Validate the config and set defaults if undefined
-        if 'kafka' in cfg:
-            if 'servers' not in cfg['kafka']:
-                cfg['kafka']['servers'] = ['localhost:9092']
-            if 'client_id' not in cfg['kafka']:
-                cfg['kafka']['client_id'] = APP_NAME
-            if 'group_id' not in cfg['kafka']:
-                cfg['kafka']['group_id'] = APP_NAME
-            if 'offset_reset_largest' not in cfg['kafka']:
-                cfg['kafka']['offset_reset_largest'] = False
-
-        else:
-            cfg['kafka'] = {}
-            cfg['kafka']['servers'] = ['localhost:9092']
-            cfg['kafka']['client_id'] = APP_NAME
-            cfg['kafka']['group_id'] = APP_NAME
-            cfg['kafka']['offset_reset_largest'] = False
 
         if 'collector' in cfg:
             if 'host' not in cfg['collector']:
@@ -185,7 +170,7 @@ def main():
     cfg_dict['router_data'] = cfg['router_data']
     cfg_dict['logging'] = cfg['logging']
 
-    # Setup signal handers
+    # Setup signal handlers
     signal.signal(signal.SIGTERM, signal_handler)
     signal.signal(signal.SIGQUIT, signal_handler)
     signal.signal(signal.SIGABRT, signal_handler)
@@ -200,34 +185,48 @@ def main():
     # Use manager queue to ensure no duplicates
     forward_queue = manager.Queue(cfg_dict['max_queue_size'])
 
-
-
     """
     # Synchronizes remote ftp directory with local directory.
     rds = RouteDataSynchronizer()
     rds.syncRouterViewArchieve()
-
-
-
-    d = Reader("rib.20160628.1600.bz2")
-    for m in d:
-        m = m.mrt
-        print('---------------------------------------------------------------')
-        print m.subtype
-        print m.type
-        print m.peer.collector
-        print m.peer.view_len
-        print m.peer.view
-        print m.peer.count
-
-        for entry in m.peer.entry:
-            print('Peer Type: 0x%02x' % entry.type)
-            print('Peer BGP ID: %s' % entry.bgp_id)
-            print('Peer IP Address: %s' % entry.ip)
-            print('Peer AS: %s' % entry.asn)
-
-        break
     """
+
+    rwp = RouteViewsProcessor(cfg_dict['router_data'], forward_queue, log_queue)
+    rwp.start()
+
+    # Start the BMP writer process
+    proc_writer = BMPWriter(cfg_dict, forward_queue, log_queue)
+    proc_writer.start()
+
+    LOG.info("Threads started")
+
+    # Monitor/do something else if needed
+    while RUNNING and rwp.is_alive():
+
+        try:
+            time.sleep(3)
+
+        except KeyboardInterrupt:
+            print "\nStop requested by user"
+            RUNNING = False
+            break
+
+    if not rwp.is_alive():
+        rwp.stop()
+        time.sleep(1)
+
+    forward_queue.join()
+
+    proc_writer.stop()
+    time.sleep(1)
+
+    manager.shutdown()
+
+    thread_logger.stop()
+    thread_logger.join()
+
+    sys.exit(0)
+
 
 if __name__ == '__main__':
     main()

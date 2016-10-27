@@ -9,12 +9,12 @@ max_queue_size: 1000
 # Collector - Where to send the BMP forwarded messages
 #
 collector:
-  ip: 127.0.0.1   # Collector IP
+  host: bmp-dev.openbmp.org   # Collector IP
   port: 5007      # Collector port number
 
-#
+# Router views data config
 router_data:
-  save_directory_path: "/Router_Data"   # Directory in which remote router data will be synchronized.
+  save_directory_path: "Router_Data"   # Directory in which remote router data will be synchronized.
   ftp_source_address: "archive.routeviews.org" # FTP Route view root directory.
 
 #
@@ -62,7 +62,3 @@ logging:
     root:
       level: INFO
       handlers: [file]
-
-
-
-

@@ -1,0 +1,125 @@
+2016-10-25 13:30:13,438 | INFO     | bmp_writer | Running bmp_writer
+2016-10-25 13:30:13,442 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-25 13:30:17,433 | INFO     | bmp_writer | rewrite stopped
+2016-10-25 13:31:05,980 | INFO     | bmp_writer | Running bmp_writer
+2016-10-25 13:31:05,985 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-25 13:31:09,981 | INFO     | bmp_writer | rewrite stopped
+2016-10-25 14:24:46,765 | INFO     | bmp_writer | Running bmp_writer
+2016-10-25 14:24:46,842 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-25 14:24:50,765 | INFO     | bmp_writer | rewrite stopped
+2016-10-25 14:26:29,684 | INFO     | bmp_writer | Running bmp_writer
+2016-10-25 14:26:29,688 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-25 14:26:33,686 | INFO     | bmp_writer | rewrite stopped
+2016-10-25 14:26:41,379 | INFO     | bmp_writer | Running bmp_writer
+2016-10-25 14:26:41,384 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-25 14:26:45,381 | INFO     | bmp_writer | rewrite stopped
+2016-10-25 14:27:02,249 | INFO     | bmp_writer | Running bmp_writer
+2016-10-25 14:27:02,253 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-25 14:27:03,234 | INFO     | bmp_writer | rewrite stopped
+2016-10-25 14:37:54,673 | INFO     | bmp_writer | Running bmp_writer
+2016-10-25 14:37:54,679 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-25 14:37:58,670 | INFO     | bmp_writer | rewrite stopped
+2016-10-25 14:46:12,011 | INFO     | bmp_writer | Running bmp_writer
+2016-10-25 14:46:12,017 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-25 14:46:16,013 | INFO     | bmp_writer | rewrite stopped
+2016-10-25 15:26:25,185 | INFO     | bmp_writer | Running bmp_writer
+2016-10-25 15:26:25,273 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-25 15:26:29,189 | INFO     | bmp_writer | rewrite stopped
+2016-10-25 16:08:11,757 | INFO     | bmp_writer | Running bmp_writer
+2016-10-25 16:08:11,837 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-25 16:08:15,760 | INFO     | bmp_writer | rewrite stopped
+2016-10-25 16:10:24,866 | INFO     | bmp_writer | Running bmp_writer
+2016-10-25 16:10:24,871 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-25 16:10:28,869 | INFO     | bmp_writer | rewrite stopped
+2016-10-25 16:19:26,659 | INFO     | bmp_writer | Running bmp_writer
+2016-10-25 16:19:26,664 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-25 16:19:48,369 | INFO     | bmp_writer | Running bmp_writer
+2016-10-25 16:19:48,374 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-25 16:20:32,044 | INFO     | bmp_writer | rewrite stopped
+2016-10-25 16:44:01,009 | INFO     | bmp_writer | Running bmp_writer
+2016-10-25 16:44:01,091 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-25 16:44:05,008 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 11:08:14,438 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 11:08:14,519 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 11:08:16,751 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 11:09:10,568 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 11:09:10,573 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 11:10:01,777 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 11:11:33,946 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 11:11:33,951 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 11:12:13,079 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 11:13:02,816 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 11:13:02,821 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 11:13:06,814 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 11:17:38,838 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 11:17:38,843 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 11:17:42,840 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 11:17:50,150 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 11:17:50,155 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 11:17:54,150 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 11:19:55,081 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 11:19:55,085 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 11:19:59,080 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 11:23:34,225 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 11:23:34,230 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 11:23:38,226 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 11:24:48,669 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 11:24:48,674 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 11:24:52,670 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 11:29:28,985 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 11:29:28,989 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 11:29:32,986 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 11:32:01,129 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 11:32:01,133 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 11:32:05,124 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 11:58:19,726 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 11:58:19,806 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 11:58:23,725 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 12:00:44,301 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 12:00:44,305 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 12:00:48,304 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 12:51:48,568 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 12:51:48,646 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 12:51:52,572 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 12:54:54,415 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 12:54:54,419 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 12:54:58,420 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 12:56:14,136 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 12:56:14,141 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 12:56:18,135 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 12:57:33,510 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 12:57:33,514 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 12:57:36,859 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 13:00:44,351 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 13:00:44,355 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 13:00:46,541 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 13:02:04,792 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 13:02:04,797 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 13:02:06,520 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 13:02:57,507 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 13:02:57,510 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 13:03:02,718 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 13:04:14,525 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 13:04:14,530 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 13:04:16,060 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 13:04:59,655 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 13:04:59,659 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 13:05:00,320 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 14:21:37,809 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 14:21:37,889 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 14:21:56,626 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 14:22:09,318 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 14:22:09,323 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 14:22:10,533 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 14:50:59,939 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 14:50:59,944 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 14:51:00,996 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 14:52:19,446 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 14:52:19,693 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 14:52:20,385 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 14:56:53,613 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 14:56:53,621 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 14:56:54,438 | INFO     | bmp_writer | rewrite stopped
+2016-10-26 15:36:51,842 | INFO     | bmp_writer | Running bmp_writer
+2016-10-26 15:36:51,917 | INFO     | bmp_writer | Connected to remote collector: bmp-dev.openbmp.org:5007
+2016-10-26 15:36:53,266 | INFO     | bmp_writer | rewrite stopped

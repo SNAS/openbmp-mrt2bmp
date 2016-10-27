@@ -12,3 +12,6 @@ src/site-packages/openbmp/__init__.pyc
 src/site-packages/openbmp/mrt2bmp/RouteDataSynchronizer.pyc
 src/site-packages/openbmp/mrt2bmp/__init__.pyc
 /src/bin/rib.20160628.1400.bz2
+/src/bin/openbmp-mrt2bmp.log
+src/site-packages/openbmp/mrt2bmp/MrtParser.pyc
+src/site-packages/openbmp/mrt2bmp/logger.pyc
