@@ -19,7 +19,7 @@ from multiprocessing import Queue, Manager
 
 from openbmp.mrt2bmp.RouteDataSynchronizer import RouteDataSynchronizer
 from openbmp.mrt2bmp.logger import LoggerThread
-from openbmp.mrt2bmp.MrtParser import RouteViewsProcessor
+from openbmp.mrt2bmp.MrtProcessors import RouteViewsProcessor
 from openbmp.mrt2bmp.CollectorSender import BMPWriter
 
 
