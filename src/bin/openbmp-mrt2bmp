@@ -191,12 +191,13 @@ def main():
     rds.syncRouterViewArchieve()
     """
 
-    rwp = RouteViewsProcessor(cfg_dict['router_data'], forward_queue, log_queue)
-    rwp.start()
-
     # Start the BMP writer process
     proc_writer = BMPWriter(cfg_dict, forward_queue, log_queue)
     proc_writer.start()
+
+    # Start the Router Views process
+    rwp = RouteViewsProcessor(cfg_dict['router_data'], forward_queue, log_queue)
+    rwp.start()
 
     LOG.info("Threads started")
 
@@ -215,8 +216,10 @@ def main():
         rwp.stop()
         time.sleep(1)
 
-    forward_queue.join()
+    if proc_writer.isConnected():
+        forward_queue.join()
 
+    proc_writer.disconnect()
     proc_writer.stop()
     time.sleep(1)
 

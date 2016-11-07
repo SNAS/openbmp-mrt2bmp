@@ -15,3 +15,4 @@ src/site-packages/openbmp/mrt2bmp/__init__.pyc
 /src/bin/openbmp-mrt2bmp.log
 src/site-packages/openbmp/mrt2bmp/MrtParser.pyc
 src/site-packages/openbmp/mrt2bmp/logger.pyc
+src/site-packages/openbmp/mrt2bmp/CollectorSender.pyc

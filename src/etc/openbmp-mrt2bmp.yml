@@ -9,13 +9,17 @@ max_queue_size: 1000
 # Collector - Where to send the BMP forwarded messages
 #
 collector:
-  host: bmp-dev.openbmp.org   # Collector IP
-  port: 5007      # Collector port number
+  # bmp-dev.openbmp.org
+  host: 172.29.67.114   # Collector address
+  port: 5030     # Collector port number
 
 # Router views data config
 router_data:
-  save_directory_path: "Router_Data"   # Directory in which remote router data will be synchronized.
   ftp_source_address: "archive.routeviews.org" # FTP Route view root directory.
+  save_directory_path: "Router_Data"   # Directory in which remote router data will be synchronized.
+  processed_directory_path: "Processed_Data" # Directory in which processed files will be stored.
+  ignore_timestamp_interval_abnormality: True # If program will ignore file timestamp intervals.
+  timestamp_interval_limit: 20 # Max number of minutes between two consecutive mrt files.
 
 #
 # Log settings
@@ -56,7 +60,6 @@ logging:
       level: INFO
       handlers: [file]
       propagate: no
-
 
     # General/main program messages
     root:
