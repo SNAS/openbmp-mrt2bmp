@@ -22,7 +22,6 @@ from openbmp.mrt2bmp.logger import LoggerThread
 from openbmp.mrt2bmp.MrtProcessors import RouteViewsProcessor
 from openbmp.mrt2bmp.CollectorSender import BMPWriter
 
-
 # Root logger
 LOG = None
 
@@ -185,10 +184,25 @@ def main():
     # Use manager queue to ensure no duplicates
     forward_queue = manager.Queue(cfg_dict['max_queue_size'])
 
-    """
-    # Synchronizes remote ftp directory with local directory.
-    rds = RouteDataSynchronizer()
-    rds.syncRouterViewArchieve()
+    # Synchronizes remote mrt files with local directory.
+    rds = RouteDataSynchronizer(cfg_dict, log_queue)
+    rds.start()
+
+    # Monitor/do something else if needed
+    while RUNNING and rds.is_alive():
+
+        try:
+            time.sleep(3)
+
+        except KeyboardInterrupt:
+            print "\nStop requested by user"
+            RUNNING = False
+            rds.stop()
+            rds.join()
+            break
+
+    print "Route sync finished"
+
     """
 
     # Start the BMP writer process
@@ -222,6 +236,7 @@ def main():
     proc_writer.disconnect()
     proc_writer.stop()
     time.sleep(1)
+    """
 
     manager.shutdown()
 
