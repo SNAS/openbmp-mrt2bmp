@@ -8,7 +8,6 @@
   and is available at http://www.eclipse.org/legal/epl-v10.html
 """
 
-import sys
 import getopt
 import yaml
 import logging
