@@ -18,7 +18,7 @@ import signal
 from multiprocessing import Queue, Manager
 
 from openbmp.mrt2bmp.RouteDataSynchronizer import RouteDataSynchronizer
-from openbmp.mrt2bmp.logger import LoggerThread
+from openbmp.mrt2bmp.Logger import LoggerThread
 from openbmp.mrt2bmp.MrtProcessors import RouteViewsProcessor
 from openbmp.mrt2bmp.CollectorSender import BMPWriter
 
@@ -184,6 +184,8 @@ def main():
     # Use manager queue to ensure no duplicates
     forward_queue = manager.Queue(cfg_dict['max_queue_size'])
 
+
+
     # Synchronizes remote mrt files with local directory.
     rds = RouteDataSynchronizer(cfg_dict, log_queue)
     rds.start()
@@ -202,8 +204,6 @@ def main():
             break
 
     print "Route sync finished"
-
-    """
 
     # Start the BMP writer process
     proc_writer = BMPWriter(cfg_dict, forward_queue, log_queue)
@@ -236,7 +236,6 @@ def main():
     proc_writer.disconnect()
     proc_writer.stop()
     time.sleep(1)
-    """
 
     manager.shutdown()
 
