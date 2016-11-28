@@ -11,6 +11,7 @@ setup(name='openbmp-mrt',
       data_files=[('etc', ['src/etc/openbmp-mrt2bmp.yml'])],
       package_dir={'openbmp': 'src/site-packages/openbmp', 'openbmp.mrt2bmp': 'src/site-packages/openbmp/mrt2bmp'},
       packages=['openbmp', 'openbmp.mrt2bmp'],
+      install_requires=['pyyaml',],
       scripts=['src/bin/openbmp-mrt2bmp']
      )
 

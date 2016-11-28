@@ -1,24 +1,13 @@
 # -------------------------------------------------------------------------
-# OpenBMP MRT2BMP configuration
+# OpenBMP ROUTE VIEWS SYNC configuration
 # -------------------------------------------------------------------------
-
-# Max size of messages in queue to be written
-max_queue_size: 10000
-
-#
-# Collector - Where to send the BMP forwarded messages
-#
-collector:
-  # bmp-dev.openbmp.org
-  host: 172.29.67.114   # Collector address
-  port: 5030     # Collector port number
 
 # Router views data config
 router_data:
+  web_source_address: "http://routeviews.org" # FTP Route view root directory.
+  number_of_downloading_threads: 10
+  max_download_queue_size: 1000
   save_directory_path: "New_Router_Data"   # Directory in which remote router data will be synchronized.
-  processed_directory_path: "Processed_Data" # Directory in which processed files will be stored.
-  ignore_timestamp_interval_abnormality: True # If program will ignore file timestamp intervals.
-  timestamp_interval_limit: 20 # Max number of minutes between two consecutive mrt files.
 
 #
 # Log settings
@@ -49,13 +38,7 @@ logging:
 
   loggers:
     # MRT Parser log messages
-    mrt_parser:
-      level: INFO
-      handlers: [file]
-      propagate: no
-
-    # BMP Writer log messages
-    bmp_writer:
+    route_views_synchronizer:
       level: INFO
       handlers: [file]
       propagate: no
