@@ -67,6 +67,23 @@ def load_config(cfg_filename, LOG):
                 print ("Configuration is missing 'router_data' section.")
             sys.exit(2)
 
+        else:
+            if cfg['router_data']['number_of_downloading_threads'] < 0 or \
+                            cfg['router_data']['number_of_downloading_threads'] > 1000:
+                if LOG:
+                    LOG.error("Number of downloading threads must be between 1 and 1000.")
+                else:
+                    print ("Number of downloading threads must be between 1 and 1000.")
+                sys.exit(2)
+
+            if cfg['router_data']['max_download_queue_size'] < 0 or \
+                            cfg['router_data']['max_download_queue_size'] > 100000:
+                if LOG:
+                    LOG.error("Max download queue size must be between 1 and 100000.")
+                else:
+                    print ("Max download queue size must be between 1 and 100000.")
+                sys.exit(2)
+
     except (IOError, yaml.YAMLError), e:
         print "Failed to load mapping config file '%s': %r" % (cfg_filename, e)
         if hasattr(e, 'problem_mark'):

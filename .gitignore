@@ -22,3 +22,5 @@ src/bin/New_Router_Data/
 src/site-packages/openbmp/mrt2bmp/HelperClasses.pyc
 src/site-packages/openbmp/mrt2bmp/MrtProcessors.pyc
 src/site-packages/openbmp/mrt2bmp/rib.20160629.0200.bz2
+/src/bin/route_views_sync/openbmp-route_views_sync.log
+src/bin/route_views_sync/openbmp-route_views_sync.log

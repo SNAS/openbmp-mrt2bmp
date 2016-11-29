@@ -10,8 +10,8 @@ max_queue_size: 10000
 #
 collector:
   # bmp-dev.openbmp.org
-  host: 172.29.67.114   # Collector address
-  port: 5030     # Collector port number
+  host: bmp-dev.openbmp.org   # Collector address
+  port: 5000     # Collector port number
 
 # Router views data config
 router_data:
