@@ -17,7 +17,7 @@ import signal
 from multiprocessing import Queue, Manager
 
 from openbmp.mrt2bmp.RouteDataSynchronizer import RouteDataSynchronizer
-from openbmp.mrt2bmp.Logger import LoggerThread
+from openbmp.mrt2bmp.logger import LoggerThread
 
 # Root logger
 LOG = None
