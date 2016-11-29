@@ -172,6 +172,8 @@ def main():
 
     LOG = logging.getLogger()
 
+    print "Route sync started"
+
     # Synchronizes remote mrt files with local directory.
     rds = RouteDataSynchronizer(cfg_dict, log_queue)
     rds.start()

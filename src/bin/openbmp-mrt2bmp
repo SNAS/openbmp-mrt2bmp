@@ -153,6 +153,8 @@ def parse_cmd_args(argv):
 
 def main():
 
+    print "Openbmp Mrt2Bmp is started"
+
     """ Main entry point """
     global LOG, RUNNING
 
@@ -218,6 +220,8 @@ def main():
 
     thread_logger.stop()
     thread_logger.join()
+
+    print "Openbmp Mrt2Bmp is finished"
 
     sys.exit(0)
 
