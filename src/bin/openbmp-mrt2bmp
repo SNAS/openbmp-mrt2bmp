@@ -212,9 +212,10 @@ def main():
     if proc_writer.isConnected():
         forward_queue.join()
 
-    proc_writer.disconnect()
-    proc_writer.stop()
-    time.sleep(1)
+    #proc_writer.disconnect()
+    #proc_writer.stop()
+    while True:
+        time.sleep(10)
 
     manager.shutdown()
 
