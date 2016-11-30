@@ -15,8 +15,8 @@ collector:
 
 # Router views data config
 router_data:
-  save_directory_path: "/home/ubuntu/omer-test/openbmp-mrt2bmp/Router_Data"   # Directory in which remote router data will be synchronized.
-  processed_directory_path: "/home/ubuntu/omer-test/openbmp-mrt2bmp/Processed_Data" # Directory in which processed files will be stored.
+  save_directory_path: "Router_Data"   # Directory in which remote router data will be synchronized.
+  processed_directory_path: "Processed_Data" # Directory in which processed files will be stored.
   ignore_timestamp_interval_abnormality: True # If program will ignore file timestamp intervals.
   timestamp_interval_limit: 20 # Max number of minutes between two consecutive mrt files.
 

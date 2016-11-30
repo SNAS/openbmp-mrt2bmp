@@ -7,7 +7,7 @@ router_data:
   web_source_address: "http://routeviews.org" # FTP Route view root directory.
   number_of_downloading_threads: 10
   max_download_queue_size: 1000
-  save_directory_path: "/home/ubuntu/omer-test/openbmp-mrt2bmp/Router_Data"   # Directory in which remote router data will be synchronized.
+  save_directory_path: "Router_Data"   # Directory in which remote router data will be synchronized.
 
 #
 # Log settings
