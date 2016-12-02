@@ -9,6 +9,7 @@ collector:
   # bmp-dev.openbmp.org
   host: bmp-dev.openbmp.org  # Collector address
   port: 5030     # Collector port number
+  delay_after_peer_ups: 5 # Delay in seconds to wait after sending the PEER_UP
 
 # Router views data config
 router_data:
