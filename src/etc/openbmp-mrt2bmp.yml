@@ -2,23 +2,21 @@
 # OpenBMP MRT2BMP configuration
 # -------------------------------------------------------------------------
 
-# Max size of messages in queue to be written
-max_queue_size: 10000
-
 #
 # Collector - Where to send the BMP forwarded messages
 #
 collector:
   # bmp-dev.openbmp.org
-  host: 127.0.0.1  # Collector address
-  port: 5000     # Collector port number
+  host: bmp-dev.openbmp.org  # Collector address
+  port: 5030     # Collector port number
 
 # Router views data config
 router_data:
-  save_directory_path: "/home/ubuntu/omer-test/Router_Data"   # Directory in which remote router data will be synchronized.
-  processed_directory_path: "/home/ubuntu/omer-test/Processed_Data" # Directory in which processed files will be stored.
+  router_directory_path: "route_views_sync/Router_Data/route-views.eqix.routeviews.org"   # Directory of the router which will be processed.
+  processed_directory_path: "route_views_sync/Processed_Data" # Directory in which processed files will be stored.
   ignore_timestamp_interval_abnormality: True # If program will ignore file timestamp intervals.
   timestamp_interval_limit: 20 # Max number of minutes between two consecutive mrt files.
+  max_queue_size: 10000 # Max size of messages in queue to be written
 
 #
 # Log settings
@@ -50,6 +48,12 @@ logging:
   loggers:
     # MRT Parser log messages
     mrt_parser:
+      level: INFO
+      handlers: [file]
+      propagate: no
+
+    # MRT Processors log messages
+    mrt_processors:
       level: INFO
       handlers: [file]
       propagate: no

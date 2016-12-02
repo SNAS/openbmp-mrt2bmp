@@ -1,25 +1,23 @@
 OpenBMP MRT2BMP
 ===============
-This reads MRT files and sends natively in BMP format to a remote collector.
+This reads MRT files of a router and sends natively in BMP format to a remote collector.
 
 ### MRT Directory Structure
 
-    Root/base directory
+    |---- DIR: <router name>
         |
-        |---- DIR: <router name>
+        |---- DIR: <subdirectory name>                  # e.g. "2016.11"
             |
-            |---- DIR: <subdirectory name>                  # e.g. "2016.11"
-                |
-                |---- DIR: RIBS
-                |    |
-                |    |---- FILE: rib.20161128.0800.bz2      # Rib file
-                |
-                |---- DIR: UPDATES
-                     |
-                     |---- FILE: updates.20161128.0800.bz2  # Update file
-                     |---- FILE: updates.20161128.0815.bz2  # Update file
-                     |---- FILE: updates.20161128.0830.bz2  # Update file
-                     |---- FILE: updates.20161128.0845.bz2  # Update file
+            |---- DIR: RIBS
+            |    |
+            |    |---- FILE: rib.20161128.0800.bz2      # Rib file
+            |
+            |---- DIR: UPDATES
+                 |
+                 |---- FILE: updates.20161128.0800.bz2  # Update file
+                 |---- FILE: updates.20161128.0815.bz2  # Update file
+                 |---- FILE: updates.20161128.0830.bz2  # Update file
+                 |---- FILE: updates.20161128.0845.bz2  # Update file
                      
 - Compressed MRT files in **.gzip** and **.bz2** formats are supported.               
                 

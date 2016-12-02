@@ -18,7 +18,6 @@ from multiprocessing import Queue, Manager
 
 from openbmp.mrt2bmp.logger import LoggerThread
 from openbmp.mrt2bmp.MrtProcessors import RouteViewsProcessor
-from openbmp.mrt2bmp.CollectorSender import BMPWriter
 
 # Root logger
 LOG = None
@@ -164,7 +163,6 @@ def main():
     # Shared dictionary between processes
     manager = Manager()
     cfg_dict = manager.dict()
-    cfg_dict['max_queue_size'] = cfg['max_queue_size']
     cfg_dict['collector'] = cfg['collector']
     cfg_dict['router_data'] = cfg['router_data']
     cfg_dict['logging'] = cfg['logging']
@@ -182,14 +180,10 @@ def main():
     LOG = logging.getLogger()
 
     # Use manager queue to ensure no duplicates
-    forward_queue = manager.Queue(cfg_dict['max_queue_size'])
-
-    # Start the BMP writer process
-    proc_writer = BMPWriter(cfg_dict, forward_queue, log_queue)
-    proc_writer.start()
+    fwd_queue = manager.Queue(cfg_dict['router_data']['max_queue_size'])
 
     # Start the Router Views process
-    rwp = RouteViewsProcessor(cfg_dict['router_data'], forward_queue, log_queue)
+    rwp = RouteViewsProcessor(cfg_dict, log_queue, fwd_queue)
     rwp.start()
 
     LOG.info("Threads started")
@@ -208,14 +202,6 @@ def main():
     if not rwp.is_alive():
         rwp.stop()
         time.sleep(1)
-
-    if proc_writer.isConnected():
-        forward_queue.join()
-
-    #proc_writer.disconnect()
-    #proc_writer.stop()
-    while True:
-        time.sleep(10)
 
     manager.shutdown()
 
