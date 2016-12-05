@@ -65,6 +65,24 @@ logging:
       handlers: [file]
       propagate: no
 
+    # BMP Writer log messages
+    router_processor:
+      level: INFO
+      handlers: [file]
+      propagate: no
+
+    # BMP Writer log messages
+    rib_processor:
+      level: INFO
+      handlers: [file]
+      propagate: no
+
+    # BMP Writer log messages
+    updates_processor:
+      level: INFO
+      handlers: [file]
+      propagate: no
+
     # General/main program messages
     root:
       level: INFO

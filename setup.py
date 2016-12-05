@@ -2,9 +2,9 @@
 
 from distutils.core import setup
 
-setup(name='openbmp-mrt',
+setup(name='openbmp-mrt2bmp',
       version='0.1.0',
-      description='OpenBMP MRT',
+      description='OpenBMP MRT2BMP',
       author='Tim Evens',
       author_email='tim@openbmp.org',
       url='',

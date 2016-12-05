@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""OpenBMP forwarder
+"""OpenBMP mrt2bmp
 
-  Copyright (c) 2013-2015 Cisco Systems, Inc. and others.  All rights reserved.
+  Copyright (c) 2013-2016 Cisco Systems, Inc. and others.  All rights reserved.
   This program and the accompanying materials are made available under the
   terms of the Eclipse Public License v1.0 which accompanies this distribution,
   and is available at http://www.eclipse.org/legal/epl-v10.html
@@ -185,8 +185,6 @@ def main():
     # Start the Router Views process
     rwp = RouteViewsProcessor(cfg_dict, log_queue, fwd_queue)
     rwp.start()
-
-    LOG.info("Threads started")
 
     # Monitor/do something else if needed
     while RUNNING and rwp.is_alive():
