@@ -6,7 +6,7 @@ This reads MRT files of a router and sends natively in BMP format to a remote co
 
     Root/base directory
         |
-        |---- DIR: <router name>
+        |---- DIR: <router name>                            # e.g. "router1"
             |
             |---- DIR: <subdirectory name>                  # e.g. "2016.11"
                 |
