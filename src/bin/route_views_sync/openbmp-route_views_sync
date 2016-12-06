@@ -31,7 +31,6 @@ APP_NAME = "openbmp-route_views_sync"
 def signal_handler(signum, frame):
 
     """ Signal handler to shutdown the program
-
         :param signum:          Signal number
         :param frame:           Stack
     """
@@ -47,12 +46,9 @@ def signal_handler(signum, frame):
 def load_config(cfg_filename, LOG):
 
     """ Load and validate the configuration from YAML
-
         Some defaults are applied if any settings are missing.
-
         :param cfg_filename:    Configuration filename to load
         :param LOG:             logger
-
         :return: Configuration dictionary is returned
     """
     cfg = {}
@@ -68,13 +64,6 @@ def load_config(cfg_filename, LOG):
             sys.exit(2)
 
         else:
-            if cfg['router_data']['number_of_downloading_threads'] < 0 or \
-                            cfg['router_data']['number_of_downloading_threads'] > 1000:
-                if LOG:
-                    LOG.error("Number of downloading threads must be between 1 and 1000.")
-                else:
-                    print ("Number of downloading threads must be between 1 and 1000.")
-                sys.exit(2)
 
             if cfg['router_data']['max_download_queue_size'] < 0 or \
                             cfg['router_data']['max_download_queue_size'] > 100000:
@@ -97,7 +86,6 @@ def load_config(cfg_filename, LOG):
 def usage(prog):
 
     """ Usage - Prints the usage for this program.
-
         :param prog:  Program name
     """
     print ""
@@ -111,11 +99,8 @@ def usage(prog):
 
 def parse_cmd_args(argv):
     """ Parse commandline arguments and load the configuration file
-
         Usage is printed and program is terminated if there is an error.
-
         :param argv:   ARGV as provided by sys.argv.  Arg 0 is the program name
-
         :returns: Command line arg configuration dictionary
     """
     cfg = {
@@ -179,9 +164,17 @@ def main():
     rds.start()
 
     # Monitor/do something else if needed
-    while RUNNING and rds.is_alive():
+    while RUNNING:
 
         try:
+            if not rds.is_alive():
+                print "Finished..."
+
+                # Waits for 5 min and runs the sync again.
+                time.sleep(300)
+                rds = RouteDataSynchronizer(cfg_dict, log_queue)
+                rds.start()
+
             time.sleep(3)
 
         except KeyboardInterrupt:
