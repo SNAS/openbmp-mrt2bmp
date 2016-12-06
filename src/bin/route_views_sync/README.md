@@ -1,12 +1,12 @@
 OpenBMP Route Views Syncronizer
 ===============================
-This downloads MRT files of routers from http://routeviews.org.
+This downloads MRT files of routers from http://routeviews.org continuously.
 
 ### MRT Directory Structure
 
     Root/base directory
         |
-        |---- DIR: <router name>
+        |---- DIR: <router name>                            # e.g. "router1"
             |
             |---- DIR: <subdirectory name>                  # e.g. "2016.11"
                 |

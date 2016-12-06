@@ -13,7 +13,7 @@ collector:
 
 # Router views data config
 router_data:
-  router_directory_path: "route_views_sync/router_data/route-views.eqix.routeviews.org"   # Directory of the router which will be processed.
+  master_directory_path: "router_data"   # Master directory of the routers data.
   processed_directory_path: "processed_data" # Directory in which processed files will be stored.
   ignore_timestamp_interval_abnormality: True # If program will ignore file timestamp intervals.
   timestamp_interval_limit: 20 # Max number of minutes between two consecutive mrt files.

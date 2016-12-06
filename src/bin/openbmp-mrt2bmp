@@ -111,6 +111,7 @@ def usage(prog):
     print "OPTIONS:"
     print "  -h, --help".ljust(30) + "Print this help menu"
     print "  -c, --config".ljust(30) + "Config filename (default is %s/etc/openbmp-mrt2bmp.yml)" % sys.prefix
+    print "  -r, --router".ljust(30) + "Router name"
     print ""
 
 def parse_cmd_args(argv):
@@ -127,8 +128,7 @@ def parse_cmd_args(argv):
            }
 
     try:
-        (opts, args) = getopt.getopt(argv[1:], "hc:",
-                                       ["help", "config="])
+        (opts, args) = getopt.getopt(argv[1:], "hc:r:",["help", "config="])
 
         for o, a in opts:
             if o in ("-h", "--help"):
@@ -137,6 +137,9 @@ def parse_cmd_args(argv):
 
             elif o in ("-c", "--config"):
                 cfg['cfg_filename'] = a
+
+            elif o in ("-r", "--router"):
+                cfg['router_name'] = a
 
             else:
                 usage(argv[0])
@@ -159,6 +162,7 @@ def main():
 
     cmd_cfg = parse_cmd_args(sys.argv)
     cfg = load_config(cmd_cfg['cfg_filename'], LOG)
+    router_name = cmd_cfg['router_name']
 
     # Shared dictionary between processes
     manager = Manager()
@@ -183,7 +187,7 @@ def main():
     fwd_queue = manager.Queue(cfg_dict['router_data']['max_queue_size'])
 
     # Start the Router Views process
-    rwp = RouteViewsProcessor(cfg_dict, log_queue, fwd_queue)
+    rwp = RouteViewsProcessor(router_name, cfg_dict, log_queue, fwd_queue)
     rwp.start()
 
     # Monitor/do something else if needed

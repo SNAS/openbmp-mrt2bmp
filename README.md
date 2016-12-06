@@ -1,23 +1,25 @@
 OpenBMP MRT2BMP
 ===============
-This reads MRT files of a router and sends natively in BMP format to a remote collector.
+This reads MRT files of a router and sends natively in BMP format to a remote collector continuously.
 
 ### MRT Directory Structure
 
-    |---- DIR: <router name>
+    Root/base directory
         |
-        |---- DIR: <subdirectory name>                  # e.g. "2016.11"
+        |---- DIR: <router name>
             |
-            |---- DIR: RIBS
-            |    |
-            |    |---- FILE: rib.20161128.0800.bz2      # Rib file
-            |
-            |---- DIR: UPDATES
-                 |
-                 |---- FILE: updates.20161128.0800.bz2  # Update file
-                 |---- FILE: updates.20161128.0815.bz2  # Update file
-                 |---- FILE: updates.20161128.0830.bz2  # Update file
-                 |---- FILE: updates.20161128.0845.bz2  # Update file
+            |---- DIR: <subdirectory name>                  # e.g. "2016.11"
+                |
+                |---- DIR: RIBS
+                |    |
+                |    |---- FILE: rib.20161128.0800.bz2      # Rib file
+                |
+                |---- DIR: UPDATES
+                     |
+                     |---- FILE: updates.20161128.0800.bz2  # Update file
+                     |---- FILE: updates.20161128.0815.bz2  # Update file
+                     |---- FILE: updates.20161128.0830.bz2  # Update file
+                     |---- FILE: updates.20161128.0845.bz2  # Update file
                      
 - Compressed MRT files in **.gzip** and **.bz2** formats are supported.               
                 
@@ -41,11 +43,11 @@ Running
 -------
 If you install the python code, then you should be able to run from a terminal
 
-    openbmp-mrt2bmp -c <configuration file>
+    openbmp-mrt2bmp -c <configuration file> -r <router name>
     
 If you are running from within the **git** directory, you can run it as follows:
 
-    PYTHONPATH=./src/site-packages python src/bin/openbmp-mrt2bmp -c src/etc/openbmp-mrt2bmp.yml
+    PYTHONPATH=./src/site-packages python src/bin/openbmp-mrt2bmp -c src/etc/openbmp-mrt2bmp.yml -r <router name>
 
 #### Usage
 ```
@@ -54,6 +56,7 @@ Usage: src/bin/openbmp-mrt2bmp [OPTIONS]
 OPTIONS:
   -h, --help                  Print this help menu
   -c, --config                Config filename (default is sys.prefix/etc/openbmp-forwarder.yml)
+  -r, --router                Router name
 ```
 
 #### Configuration
