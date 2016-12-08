@@ -141,6 +141,10 @@ def parse_cmd_args(argv):
             elif o in ("-r", "--router"):
                 cfg['router_name'] = a
 
+                # If router is blank, then error out.
+                if cfg['router_name'].strip() == "":
+                    raise getopt.GetoptError
+
             else:
                 usage(argv[0])
                 sys.exit(1)
@@ -162,6 +166,7 @@ def main():
 
     cmd_cfg = parse_cmd_args(sys.argv)
     cfg = load_config(cmd_cfg['cfg_filename'], LOG)
+
     router_name = cmd_cfg['router_name']
 
     # Shared dictionary between processes

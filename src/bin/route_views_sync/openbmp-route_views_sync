@@ -28,13 +28,18 @@ RUNNING = True
 # Default App name
 APP_NAME = "openbmp-route_views_sync"
 
+rds = None
+
 def signal_handler(signum, frame):
 
     """ Signal handler to shutdown the program
         :param signum:          Signal number
         :param frame:           Stack
     """
-    global RUNNING, LOG
+    global RUNNING, LOG, rds
+
+    if rds is not None:
+        rds.clean_temp_files()
 
     if LOG:
         LOG.info("Caught signal %d, exiting", signum)
@@ -149,6 +154,7 @@ def main():
     signal.signal(signal.SIGTERM, signal_handler)
     signal.signal(signal.SIGQUIT, signal_handler)
     signal.signal(signal.SIGABRT, signal_handler)
+    signal.signal(signal.SIGINT, signal_handler)
 
     # Setup the multiprocessing logging queue
     log_queue = Queue()
@@ -160,6 +166,7 @@ def main():
     print "Route sync started"
 
     # Synchronizes remote mrt files with local directory.
+    global rds
     rds = RouteDataSynchronizer(cfg_dict, log_queue)
     rds.start()
 
@@ -168,12 +175,14 @@ def main():
 
         try:
             if not rds.is_alive():
-                print "Finished..."
 
                 # Waits for 5 min and runs the sync again.
+                print "Route views checking is ended..."
                 time.sleep(300)
+
                 rds = RouteDataSynchronizer(cfg_dict, log_queue)
                 rds.start()
+                print "Route views checking is started..."
 
             time.sleep(3)
 
