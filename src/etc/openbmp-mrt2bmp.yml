@@ -1,0 +1,89 @@
+# -------------------------------------------------------------------------
+# OpenBMP MRT2BMP configuration
+# -------------------------------------------------------------------------
+
+#
+# Collector - Where to send the BMP forwarded messages
+#
+collector:
+  # bmp-dev.openbmp.org
+  host: bmp-dev.openbmp.org  # Collector address
+  port: 5030     # Collector port number
+  delay_after_init_and_peer_ups: 5 # Delay in seconds to wait after sending the PEER_UP
+
+# Router views data config
+router_data:
+  master_directory_path: "route_views_sync/router_data"   # Master directory of the routers data.
+  processed_directory_path: "processed_data" # Directory in which processed files will be stored.
+  ignore_timestamp_interval_abnormality: True # If program will ignore file timestamp intervals.
+  timestamp_interval_limit: 20 # Max number of minutes between two consecutive mrt files.
+  max_queue_size: 10000 # Max size of messages in queue to be written
+
+#
+# Log settings
+#
+logging:
+  version: 1
+  disable_existing_loggers: True
+
+  formatters:
+    default:
+      format: '%(asctime)s | %(levelname)-8s | %(name)s | %(message)s'
+
+  handlers:
+    console:
+      class: logging.StreamHandler
+      level: DEBUG
+      formatter: default
+      stream: ext://sys.stdout
+
+    file:
+      class: logging.handlers.RotatingFileHandler
+      level: DEBUG
+      formatter: default
+      maxBytes: 20971520
+      backupCount: 10
+      encoding: utf8
+      filename: openbmp-mrt2bmp.log
+
+  loggers:
+    # MRT Parser log messages
+    mrt_parser:
+      level: INFO
+      handlers: [file]
+      propagate: no
+
+    # MRT Processors log messages
+    mrt_processors:
+      level: INFO
+      handlers: [file]
+      propagate: no
+
+    # BMP Writer log messages
+    bmp_writer:
+      level: INFO
+      handlers: [file]
+      propagate: no
+
+    # BMP Writer log messages
+    router_processor:
+      level: INFO
+      handlers: [file]
+      propagate: no
+
+    # BMP Writer log messages
+    rib_processor:
+      level: INFO
+      handlers: [file]
+      propagate: no
+
+    # BMP Writer log messages
+    updates_processor:
+      level: INFO
+      handlers: [file]
+      propagate: no
+
+    # General/main program messages
+    root:
+      level: INFO
+      handlers: [file]
