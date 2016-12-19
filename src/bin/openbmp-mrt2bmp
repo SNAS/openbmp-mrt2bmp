@@ -198,9 +198,8 @@ def main():
 
     if is_use_route_views:
         # Start the Router data sync
-        # rds = RouteDataSynchronizer(cfg_dict, log_queue, sync_mutex, router_name)
-        # rds.start()
-        pass
+        rds = RouteDataSynchronizer(cfg_dict, log_queue, sync_mutex, router_name)
+        rds.start()
 
     # Start the Router Views process
     rwp = RouteViewsProcessor(router_name, cfg_dict, log_queue, fwd_queue, sync_mutex)
