@@ -41,9 +41,8 @@ You can either run the code within the **git** directory or you can install it i
 
 ### Running:
 
-1-) Running with provided MRT files.
-------------------------------------
-If you will provide mrt2bmp with your MRT files, you must change config file.
+1-) Running a router with your MRT files.
+-----------------------------------------
 
 If you install the python code, then you should be able to run from a terminal
 
@@ -53,19 +52,27 @@ If you are running from within the **git** directory, you can run it as follows:
 
     PYTHONPATH=./src/site-packages python src/bin/openbmp-mrt2bmp -c src/etc/openbmp-mrt2bmp.yml -r <router name>
 
-2-) Running with MRT files from routeviews.org
-----------------------------------------------
+2-) Running a router with MRT files from routeviews.org
+-------------------------------------------------------
 
+If you install the python code, then you should be able to run from a terminal
 
+    openbmp-mrt2bmp -c <configuration file> --rv <router name>
+
+If you are running from within the **git** directory, you can run it as follows:
+
+    PYTHONPATH=./src/site-packages python src/bin/openbmp-mrt2bmp -c src/etc/openbmp-mrt2bmp.yml --rv <router name>
 
 #### Usage
 ```
 Usage: src/bin/openbmp-mrt2bmp [OPTIONS]
 
 OPTIONS:
-  -h, --help                  Print this help menu
-  -c, --config                Config filename (default is sys.prefix/etc/openbmp-forwarder.yml)
-  -r, --router                Router name
+  -h, --help                        Print this help menu
+  -c, --config                      Config filename (default is sys.prefix/etc/openbmp-forwarder.yml)
+  -r, --router                      Router name which you want to run with your MRT files
+  --rv, --routeviews                Router name which you want to run from routeviews.org
+  --rv list, --routeviews list      Print name of routers from routeviews.org
 ```
 
 #### Configuration

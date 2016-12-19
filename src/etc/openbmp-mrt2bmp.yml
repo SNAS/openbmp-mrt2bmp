@@ -19,10 +19,9 @@ router_data:
   timestamp_interval_limit: 20 # Max number of minutes between two consecutive mrt files.
   max_queue_size: 10000 # Max size of messages in queue to be written
 
-  # OPTIONAL - Router views sync config
+  # Router views sync config
   route_views_sync:
-    use_route_views: True
-    web_source_address: "http://routeviews.org" # FTP Route view root directory.
+    web_source_address: "http://routeviews.org" # Do not change !
     max_download_queue_size: 1000
 
 #
