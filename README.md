@@ -6,7 +6,7 @@ This reads MRT files of a router and sends natively in BMP format to a remote co
 
     Root/base directory
         |
-        |---- DIR: <router name>                            # e.g. "router1"
+        |---- DIR: <router name>                            # e.g. "route-views2.oregon-ix.net"
             |
             |---- DIR: <subdirectory name>                  # e.g. "2016.11"
                 |
@@ -39,8 +39,12 @@ You can either run the code within the **git** directory or you can install it i
     cd openbmp-mrt2bmp
     sudo python setup.py install
 
-Running
--------
+### Running:
+
+1-) Running with provided MRT files.
+------------------------------------
+If you will provide mrt2bmp with your MRT files, you must change config file.
+
 If you install the python code, then you should be able to run from a terminal
 
     openbmp-mrt2bmp -c <configuration file> -r <router name>
@@ -48,6 +52,11 @@ If you install the python code, then you should be able to run from a terminal
 If you are running from within the **git** directory, you can run it as follows:
 
     PYTHONPATH=./src/site-packages python src/bin/openbmp-mrt2bmp -c src/etc/openbmp-mrt2bmp.yml -r <router name>
+
+2-) Running with MRT files from routeviews.org
+----------------------------------------------
+
+
 
 #### Usage
 ```

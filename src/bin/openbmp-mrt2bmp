@@ -14,10 +14,11 @@ import logging
 import time
 import sys
 import signal
-from multiprocessing import Queue, Manager
+from multiprocessing import Queue, Manager, Lock
 
 from openbmp.mrt2bmp.logger import LoggerThread
 from openbmp.mrt2bmp.MrtProcessors import RouteViewsProcessor
+from openbmp.mrt2bmp.RouteDataSynchronizer import RouteDataSynchronizer
 
 # Root logger
 LOG = None
@@ -181,24 +182,35 @@ def main():
     signal.signal(signal.SIGQUIT, signal_handler)
     signal.signal(signal.SIGABRT, signal_handler)
 
-    # Setup the multiprocessing logging queue
+    # Setup the multiprocessing logging queue-
     log_queue = Queue()
     thread_logger = LoggerThread(log_queue, cfg_dict['logging'])
     thread_logger.start()
 
-    LOG = logging.getLogger()
-
     # Use manager queue to ensure no duplicates
     fwd_queue = manager.Queue(cfg_dict['router_data']['max_queue_size'])
 
+    # Create the mutex.
+    sync_mutex = Lock()
+
+    # Boolean if to use routeviews.org
+    is_use_route_views = cfg_dict['router_data']['route_views_sync']['use_route_views']
+
+    if is_use_route_views:
+        # Start the Router data sync
+        # rds = RouteDataSynchronizer(cfg_dict, log_queue, sync_mutex, router_name)
+        # rds.start()
+        pass
+
     # Start the Router Views process
-    rwp = RouteViewsProcessor(router_name, cfg_dict, log_queue, fwd_queue)
+    rwp = RouteViewsProcessor(router_name, cfg_dict, log_queue, fwd_queue, sync_mutex)
     rwp.start()
 
     # Monitor/do something else if needed
-    while RUNNING and rwp.is_alive():
+    while RUNNING:
 
         try:
+
             time.sleep(3)
 
         except KeyboardInterrupt:
@@ -206,7 +218,7 @@ def main():
             RUNNING = False
             break
 
-    if not rwp.is_alive():
+    if rwp.is_alive():
         rwp.stop()
         time.sleep(1)
 
