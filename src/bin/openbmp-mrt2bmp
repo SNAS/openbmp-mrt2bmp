@@ -14,16 +14,20 @@ import logging
 import time
 import sys
 import signal
-from multiprocessing import Queue, Manager
+from multiprocessing import Queue, Manager, Lock
 
 from openbmp.mrt2bmp.logger import LoggerThread
 from openbmp.mrt2bmp.MrtProcessors import RouteViewsProcessor
+from openbmp.mrt2bmp.RouteDataSynchronizer import RouteDataSynchronizer
 
 # Root logger
 LOG = None
 
 # Running flag for main process
 RUNNING = True
+
+# Route views is running.
+USE_ROUTE_VIEWS = False
 
 # Default App name
 APP_NAME = "openbmp-mrt2bmp"
@@ -111,7 +115,9 @@ def usage(prog):
     print "OPTIONS:"
     print "  -h, --help".ljust(30) + "Print this help menu"
     print "  -c, --config".ljust(30) + "Config filename (default is %s/etc/openbmp-mrt2bmp.yml)" % sys.prefix
-    print "  -r, --router".ljust(30) + "Router name"
+    print "  -r, --router".ljust(30) + "Router name which you want to run with your MRT files"
+    print "  --rv, --routeviews".ljust(30) + "Router name which you want to run from routeviews.org"
+    print "  --rv list, --routeviews list".ljust(30) + "Print name of routers from routeviews.org"
     print ""
 
 def parse_cmd_args(argv):
@@ -127,8 +133,10 @@ def parse_cmd_args(argv):
             'cfg_filename': "%s/etc/%s.yml" % (sys.prefix, APP_NAME)
            }
 
+    global USE_ROUTE_VIEWS
+
     try:
-        (opts, args) = getopt.getopt(argv[1:], "hc:r:",["help", "config="])
+        (opts, args) = getopt.getopt(argv[1:], "hc:r:",["help", "config=", "routeviews=", "rv="])
 
         for o, a in opts:
             if o in ("-h", "--help"):
@@ -138,8 +146,37 @@ def parse_cmd_args(argv):
             elif o in ("-c", "--config"):
                 cfg['cfg_filename'] = a
 
+            elif o in ("--rv", "--routeviews"):
+
+                list_of_routers = RouteDataSynchronizer.getListOfRouters("http://routeviews.org")
+
+                if a == "list":
+                    # Print list of routers from routeviews.org
+                    print "List of routers from routeviews.org"
+
+                    for r in list_of_routers:
+                        print "- %s" % r[0]
+
+                    sys.exit(0)
+
+                else:
+                    router_exists = False
+
+                    for r, k in list_of_routers:
+                        if r == a:
+                            router_exists = True
+
+                    if not router_exists:
+                        print("'%s' is not a valid router on routeviews.org" % a)
+                        sys.exit(2)
+
+                    cfg['router_name'] = a
+                    USE_ROUTE_VIEWS = True
+
             elif o in ("-r", "--router"):
                 cfg['router_name'] = a
+
+                USE_ROUTE_VIEWS = False
 
                 # If router is blank, then error out.
                 if cfg['router_name'].strip() == "":
@@ -181,24 +218,32 @@ def main():
     signal.signal(signal.SIGQUIT, signal_handler)
     signal.signal(signal.SIGABRT, signal_handler)
 
-    # Setup the multiprocessing logging queue
+    # Setup the multiprocessing logging queue-
     log_queue = Queue()
     thread_logger = LoggerThread(log_queue, cfg_dict['logging'])
     thread_logger.start()
 
-    LOG = logging.getLogger()
-
     # Use manager queue to ensure no duplicates
     fwd_queue = manager.Queue(cfg_dict['router_data']['max_queue_size'])
 
+    # Create the mutex.
+    sync_mutex = Lock()
+
+    global USE_ROUTE_VIEWS
+    if USE_ROUTE_VIEWS:
+        # Start the Router data sync
+        rds = RouteDataSynchronizer(cfg_dict, log_queue, sync_mutex, router_name)
+        rds.start()
+
     # Start the Router Views process
-    rwp = RouteViewsProcessor(router_name, cfg_dict, log_queue, fwd_queue)
+    rwp = RouteViewsProcessor(router_name, cfg_dict, log_queue, fwd_queue, sync_mutex)
     rwp.start()
 
     # Monitor/do something else if needed
-    while RUNNING and rwp.is_alive():
+    while RUNNING:
 
         try:
+
             time.sleep(3)
 
         except KeyboardInterrupt:
@@ -206,7 +251,7 @@ def main():
             RUNNING = False
             break
 
-    if not rwp.is_alive():
+    if rwp.is_alive():
         rwp.stop()
         time.sleep(1)
 

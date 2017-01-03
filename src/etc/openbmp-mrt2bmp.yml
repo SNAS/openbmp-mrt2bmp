@@ -13,11 +13,16 @@ collector:
 
 # Router views data config
 router_data:
-  master_directory_path: "route_views_sync/router_data"   # Master directory of the routers data.
+  master_directory_path: "router_data"   # Master directory of the routers data.
   processed_directory_path: "processed_data" # Directory in which processed files will be stored.
   ignore_timestamp_interval_abnormality: True # If program will ignore file timestamp intervals.
   timestamp_interval_limit: 20 # Max number of minutes between two consecutive mrt files.
   max_queue_size: 10000 # Max size of messages in queue to be written
+
+  # Router views sync config
+  route_views_sync:
+    web_source_address: "http://routeviews.org" # Do not change !
+    max_download_queue_size: 1000
 
 #
 # Log settings
@@ -79,6 +84,12 @@ logging:
 
     # BMP Writer log messages
     updates_processor:
+      level: INFO
+      handlers: [file]
+      propagate: no
+
+    # MRT Parser log messages
+    route_views_synchronizer:
       level: INFO
       handlers: [file]
       propagate: no
