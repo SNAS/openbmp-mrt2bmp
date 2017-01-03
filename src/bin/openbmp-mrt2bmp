@@ -229,6 +229,8 @@ def main():
     # Create the mutex.
     sync_mutex = Lock()
 
+    rds = None
+
     global USE_ROUTE_VIEWS
     if USE_ROUTE_VIEWS:
         # Start the Router data sync
@@ -253,6 +255,10 @@ def main():
 
     if rwp.is_alive():
         rwp.stop()
+        time.sleep(1)
+
+    if rds is not None:
+        rds.stop()
         time.sleep(1)
 
     manager.shutdown()
