@@ -47,8 +47,6 @@ def signal_handler(signum, frame):
 
     RUNNING = False
 
-    sys.exit(0)
-
 def load_config(cfg_filename, LOG):
     """ Load and validate the configuration from YAML
 
