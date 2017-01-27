@@ -1,26 +1,26 @@
 OpenBMP MRT2BMP
 ===============
-This reads MRT files of a router and sends natively in BMP format to a remote collector continuously.
+This consumer reads MRT files of a router and sends natively in BMP format to a remote collector continuously.
 
 > When you exit MRT2BMP, **router** and **peers** will be shown **down**.
 
 ### MRT2BMP Structure
 
-    router --> MRT --> MRT2BMP --> OpenBMP Collector --> Kafka Message Bus --> MySQL Consumer
-                
+    Router --> MRT --> MRT2BMP --> OpenBMP Collector --> Kafka Message Bus --> MySQL Consumer
+
 Installation
 ------------
-You can either run the code within the **git** directory or you can install it in your python path. 
+You can either run the code within the **git** directory or you can install it in your python path.
 
-> If you are going to run it within the **git** directory, see running instructions.  
+> If you are going to run it within the **git** directory, see running instructions.
 
 ### Install Dependencies:
-    
+
     sudo pip install pyyaml
+    sudo apt-get install python-setuptools-git (for Ubuntu)
 
 ### Install:
 
-    sudo apt-get install git
     git clone https://github.com/OpenBMP/openbmp-mrt2bmp.git
     cd openbmp-mrt2bmp
     sudo python setup.py install
@@ -54,13 +54,17 @@ If you install the python code, then you should be able to run from a terminal
 
     nohup openbmp-mrt2bmp -c <configuration file> --rv <router name> > /dev/null 2>&1 &
 
+#### Example Run:
+
+    nohup openbmp-mrt2bmp -c src/etc/openbmp-mrt2bmp.yml --rv route-views2.oregon-ix.net > /dev/null 2>&1 &
+
 If you are running from within the **git** directory, you can run it as follows:
 
     nohup PYTHONPATH=./src/site-packages python src/bin/openbmp-mrt2bmp -c src/etc/openbmp-mrt2bmp.yml --rv <router name> > /dev/null 2>&1 &
 
 #### Usage
 ```
-Usage: src/bin/openbmp-mrt2bmp [OPTIONS]
+Usage: ./openbmp-mrt2bmp [OPTIONS]
 
 OPTIONS:
   -h, --help                        Print this help menu
@@ -72,6 +76,8 @@ OPTIONS:
 
 #### Configuration
 Configuration is in YAML format via the **openbmp-mrt2bmp.yml** file.  See the file for details.
+
+> ** You should provide **directory paths** that are **writable** by the consumer.
 
 ### MRT Directory Structure
 
