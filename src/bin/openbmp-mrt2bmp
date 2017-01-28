@@ -220,8 +220,11 @@ def main():
 
     # Setup the multiprocessing logging queue-
     log_queue = Queue()
-    #cfg_dict['logging']['handlers']['file']['filename'] = "openbmp-mrt2bmp_" + router_name + ".log"
-    thread_logger = LoggerThread(log_queue, cfg_dict['logging'])
+    cfg_logging = cfg_dict['logging']
+
+    # Log file is named with router name.
+    cfg_logging['handlers']['file']['filename'] = "openbmp-mrt2bmp_" + router_name + ".log"
+    thread_logger = LoggerThread(log_queue, cfg_logging)
     thread_logger.start()
 
     # Use manager queue to ensure no duplicates
