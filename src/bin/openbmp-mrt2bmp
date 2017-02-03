@@ -220,7 +220,11 @@ def main():
 
     # Setup the multiprocessing logging queue-
     log_queue = Queue()
-    thread_logger = LoggerThread(log_queue, cfg_dict['logging'])
+    cfg_logging = cfg_dict['logging']
+
+    # Log file is named with router name.
+    cfg_logging['handlers']['file']['filename'] = "openbmp-mrt2bmp_" + router_name + ".log"
+    thread_logger = LoggerThread(log_queue, cfg_logging)
     thread_logger.start()
 
     # Use manager queue to ensure no duplicates
@@ -228,6 +232,8 @@ def main():
 
     # Create the mutex.
     sync_mutex = Lock()
+
+    rds = None
 
     global USE_ROUTE_VIEWS
     if USE_ROUTE_VIEWS:
@@ -253,6 +259,10 @@ def main():
 
     if rwp.is_alive():
         rwp.stop()
+        time.sleep(1)
+
+    if rds is not None:
+        rds.stop()
         time.sleep(1)
 
     manager.shutdown()

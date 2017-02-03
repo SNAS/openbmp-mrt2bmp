@@ -1,6 +1,83 @@
 OpenBMP MRT2BMP
 ===============
-This reads MRT files of a router and sends natively in BMP format to a remote collector continuously.
+This consumer reads MRT files of a router and sends natively in BMP format to a remote collector continuously.
+
+> When you exit MRT2BMP, **router** and **peers** will be shown **down**.
+
+### MRT2BMP Structure
+
+    Router --> MRT --> MRT2BMP --> OpenBMP Collector --> Kafka Message Bus --> MySQL Consumer
+
+Installation
+------------
+You can either run the code within the **git** directory or you can install it in your python path.
+
+> If you are going to run it within the **git** directory, see running instructions.
+
+### Install Dependencies:
+
+    sudo pip install pyyaml
+    sudo apt-get install python-setuptools-git (for Ubuntu)
+
+### Install:
+
+    git clone https://github.com/OpenBMP/openbmp-mrt2bmp.git
+    cd openbmp-mrt2bmp
+    sudo python setup.py install
+
+### Running:
+
+Configure
+-----------------------------------------
+Default config file path is **src/etc/openbmp-mrt2bmp.yml**
+> Change **collector address** and **collector port** in the config file.
+
+1-) Running a router with your MRT files
+-----------------------------------------
+
+If you install the python code, then you should be able to run from a terminal
+
+    nohup openbmp-mrt2bmp -c <configuration file> -r <router name> > /dev/null 2>&1 &
+
+If you are running from within the **git** directory, you can run it as follows:
+
+     nohup PYTHONPATH=./src/site-packages python src/bin/openbmp-mrt2bmp -c src/etc/openbmp-mrt2bmp.yml -r <router name> > /dev/null 2>&1 &
+
+2-) Running a router with MRT files from routeviews.org
+-------------------------------------------------------
+
+You can see list of routers from routeviews.org by running it as follows:
+
+    openbmp-mrt2bmp --rv list
+
+If you install the python code, then you should be able to run from a terminal
+
+    nohup openbmp-mrt2bmp -c <configuration file> --rv <router name> > /dev/null 2>&1 &
+
+#### Example Run:
+
+    nohup openbmp-mrt2bmp -c src/etc/openbmp-mrt2bmp.yml --rv route-views2.oregon-ix.net > /dev/null 2>&1 &
+
+If you are running from within the **git** directory, you can run it as follows:
+
+    nohup PYTHONPATH=./src/site-packages python src/bin/openbmp-mrt2bmp -c src/etc/openbmp-mrt2bmp.yml --rv <router name> > /dev/null 2>&1 &
+
+#### Usage
+```
+Usage: ./openbmp-mrt2bmp [OPTIONS]
+
+OPTIONS:
+  -h, --help                        Print this help menu
+  -c, --config                      Config filename (default is src/etc/openbmp-mrt2bmp.yml)
+  -r, --router                      Router name which you want to run with your MRT files
+  --rv, --routeviews                Router name which you want to run from routeviews.org
+  --rv list, --routeviews list      Print name of routers from routeviews.org
+```
+
+#### Configuration
+Configuration is in YAML format via the **openbmp-mrt2bmp.yml** file.  See the file for details.
+
+> ** You should provide **directory paths** that are **writable** by the consumer.
 
 ### MRT Directory Structure
 
@@ -20,60 +97,5 @@ This reads MRT files of a router and sends natively in BMP format to a remote co
                      |---- FILE: updates.20161128.0815.bz2  # Update file
                      |---- FILE: updates.20161128.0830.bz2  # Update file
                      |---- FILE: updates.20161128.0845.bz2  # Update file
-                     
-- Compressed MRT files in **.gzip** and **.bz2** formats are supported.               
-                
-Installation
-------------
-You can either run the code within the **git** directory or you can install it in your python path. 
 
-> If you are going to run it within the **git** directory, see running instructions.  
-
-### Install Dependencies:
-    
-    sudo pip install pyyaml
-
-### Install:
-
-    git clone https://github.com/OpenBMP/openbmp-mrt2bmp.git
-    cd openbmp-mrt2bmp
-    sudo python setup.py install
-
-### Running:
-
-1-) Running a router with your MRT files.
------------------------------------------
-
-If you install the python code, then you should be able to run from a terminal
-
-    openbmp-mrt2bmp -c <configuration file> -r <router name>
-    
-If you are running from within the **git** directory, you can run it as follows:
-
-    PYTHONPATH=./src/site-packages python src/bin/openbmp-mrt2bmp -c src/etc/openbmp-mrt2bmp.yml -r <router name>
-
-2-) Running a router with MRT files from routeviews.org
--------------------------------------------------------
-
-If you install the python code, then you should be able to run from a terminal
-
-    openbmp-mrt2bmp -c <configuration file> --rv <router name>
-
-If you are running from within the **git** directory, you can run it as follows:
-
-    PYTHONPATH=./src/site-packages python src/bin/openbmp-mrt2bmp -c src/etc/openbmp-mrt2bmp.yml --rv <router name>
-
-#### Usage
-```
-Usage: src/bin/openbmp-mrt2bmp [OPTIONS]
-
-OPTIONS:
-  -h, --help                        Print this help menu
-  -c, --config                      Config filename (default is sys.prefix/etc/openbmp-forwarder.yml)
-  -r, --router                      Router name which you want to run with your MRT files
-  --rv, --routeviews                Router name which you want to run from routeviews.org
-  --rv list, --routeviews list      Print name of routers from routeviews.org
-```
-
-#### Configuration
-Configuration is in YAML format via the **openbmp-mrt2bmp.yml** file.  See the file for details.
+- Compressed MRT files in **.gzip** and **.bz2** formats are supported.
