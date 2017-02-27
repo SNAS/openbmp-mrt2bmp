@@ -19,6 +19,7 @@ from multiprocessing import Queue, Manager, Lock
 from openbmp.mrt2bmp.logger import LoggerThread
 from openbmp.mrt2bmp.MrtProcessors import RouteViewsProcessor
 from openbmp.mrt2bmp.RouteDataSynchronizer import RouteDataSynchronizer
+from openbmp.mrt2bmp.RipeSynchronizer import RipeSynchronizer
 
 # Root logger
 LOG = None
@@ -28,6 +29,9 @@ RUNNING = True
 
 # Route views is running.
 USE_ROUTE_VIEWS = False
+
+# Ripe data is running
+USE_RIPE = False
 
 # Default App name
 APP_NAME = "openbmp-mrt2bmp"
@@ -134,9 +138,10 @@ def parse_cmd_args(argv):
            }
 
     global USE_ROUTE_VIEWS
+    global USE_RIPE
 
     try:
-        (opts, args) = getopt.getopt(argv[1:], "hc:r:",["help", "config=", "routeviews=", "rv="])
+        (opts, args) = getopt.getopt(argv[1:], "hc:r:r:",["help", "config=", "routeviews=", "rv=", "rp="])
 
         for o, a in opts:
             if o in ("-h", "--help"):
@@ -172,6 +177,35 @@ def parse_cmd_args(argv):
 
                     cfg['router_name'] = a
                     USE_ROUTE_VIEWS = True
+
+            elif o in ("--rp", "--ripe"):
+
+                print "Ripe is chosen..."
+
+                list_of_routers = RipeSynchronizer.getListOfRouters("https://www.ripe.net/analyse/internet-measurements/routing-information-service-ris/ris-raw-data")
+
+                if a == "list":
+                    # Print list of routers from routeviews.org
+                    print "List of routers from ripe.net"
+
+                    for r in list_of_routers:
+                        print "- %s" % r[0]
+
+                    sys.exit(0)
+
+                else:
+                    router_exists = False
+
+                    for r, k in list_of_routers:
+                        if r == a:
+                            router_exists = True
+
+                    if not router_exists:
+                        print("'%s' is not a valid router on ripe.net" % a)
+                        sys.exit(2)
+
+                    cfg['router_name'] = a
+                    USE_RIPE = True
 
             elif o in ("-r", "--router"):
                 cfg['router_name'] = a
@@ -234,12 +268,19 @@ def main():
     sync_mutex = Lock()
 
     rds = None
+    ris = None
 
     global USE_ROUTE_VIEWS
     if USE_ROUTE_VIEWS:
-        # Start the Router data sync
+        # Start the Router views data sync
         rds = RouteDataSynchronizer(cfg_dict, log_queue, sync_mutex, router_name)
         rds.start()
+
+    global USE_RIPE
+    if USE_RIPE:
+        # Start the Ripe data sync
+        ris = RipeSynchronizer(cfg_dict, log_queue, sync_mutex, router_name)
+        ris.start()
 
     # Start the Router Views process
     rwp = RouteViewsProcessor(router_name, cfg_dict, log_queue, fwd_queue, sync_mutex)
@@ -263,6 +304,10 @@ def main():
 
     if rds is not None:
         rds.stop()
+        time.sleep(1)
+
+    if ris is not None:
+        ris.stop()
         time.sleep(1)
 
     manager.shutdown()

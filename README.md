@@ -62,6 +62,25 @@ If you are running from within the **git** directory, you can run it as follows:
 
     nohup PYTHONPATH=./src/site-packages python src/bin/openbmp-mrt2bmp -c src/etc/openbmp-mrt2bmp.yml --rv <router name> > /dev/null 2>&1 &
 
+3-) Running a router with MRT files from ripe.net
+-------------------------------------------------
+
+You can see list of routers from ripe.net by running it as follows:
+
+    openbmp-mrt2bmp --rp list
+
+If you install the python code, then you should be able to run from a terminal
+
+    nohup openbmp-mrt2bmp -c <configuration file> --rp <router name> > /dev/null 2>&1 &
+
+#### Example Run:
+
+    nohup openbmp-mrt2bmp -c src/etc/openbmp-mrt2bmp.yml --rp rrc00.ripe.net > /dev/null 2>&1 &
+
+If you are running from within the **git** directory, you can run it as follows:
+
+    nohup PYTHONPATH=./src/site-packages python src/bin/openbmp-mrt2bmp -c src/etc/openbmp-mrt2bmp.yml --rp <router name> > /dev/null 2>&1 &
+
 #### Usage
 ```
 Usage: ./openbmp-mrt2bmp [OPTIONS]
@@ -72,6 +91,8 @@ OPTIONS:
   -r, --router                      Router name which you want to run with your MRT files
   --rv, --routeviews                Router name which you want to run from routeviews.org
   --rv list, --routeviews list      Print name of routers from routeviews.org
+  --rp, --ripe                      Router name which you want to run from ripe.net
+  --rp list, --ripe list            Print name of routers from ripe.net
 ```
 
 #### Configuration
@@ -83,13 +104,14 @@ Configuration is in YAML format via the **openbmp-mrt2bmp.yml** file.  See the f
 
     Root/base directory
         |
-        |---- DIR: <router name>                            # e.g. "route-views2.oregon-ix.net"
+        |---- DIR: <router name>                            # e.g. "route-views2.oregon-ix.net","rrc00.ripe.net"
             |
             |---- DIR: <subdirectory name>                  # e.g. "2016.11"
                 |
                 |---- DIR: RIBS
                 |    |
                 |    |---- FILE: rib.20161128.0800.bz2      # Rib file
+                     |---- FILE: bview.20170222.1600.gz      # Bview file
                 |
                 |---- DIR: UPDATES
                      |

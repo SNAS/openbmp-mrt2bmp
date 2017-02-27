@@ -7,8 +7,8 @@
 #
 collector:
   # bmp-dev.openbmp.org
-  host: bmp-dev.openbmp.org  # Collector addressp
-  port: 5030     # Collector port number
+  host: localhost  # Collector address
+  port: 5000     # Collector port number
   delay_after_init_and_peer_ups: 5 # Delay in seconds to wait after sending the PEER_UP
 
 # Router views data config
@@ -24,6 +24,10 @@ router_data:
     web_source_address: "http://routeviews.org" # Do not change !
     max_download_queue_size: 1000
 
+  # Ripe sync config
+  ripe_sync:
+    web_source_address: "https://www.ripe.net/analyse/internet-measurements/routing-information-service-ris/ris-raw-data" # Do not change !
+    max_download_queue_size: 1000
 #
 # Log settings
 #
@@ -90,6 +94,12 @@ logging:
 
     # MRT Parser log messages
     route_views_synchronizer:
+      level: INFO
+      handlers: [file]
+      propagate: no
+
+    # MRT Parser log messages
+    ripe_synchronizer:
       level: INFO
       handlers: [file]
       propagate: no
