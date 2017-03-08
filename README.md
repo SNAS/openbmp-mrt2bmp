@@ -51,9 +51,9 @@ You can find example router directory structure in **src/etc/example_routers**. 
 > - **Router directory:** Directory in which router's subdirectories are stored. Name of this directory will be the router name.
 > - **Subdirectory:** Subdirectories in which **RIBS** and **UPDATES** directories are stored. Name of these directories must be in format **YYYY.MM**. e.g. "2017.03"
 > - **RIBS Directory:** Directory in which **RIB** files are stored. Name of this directory must be "RIBS".
-    > ~ File name of a **RIB** file must be in format **"rib.YYYYMMDD.HHMM"** or **"bview.YYYYMMDD.HHMM"**. e.g. **"rib.20170222.1600"**, **"bview.20170222.1600"**
+<br> - File name of a **RIB** file must be in format **"rib.YYYYMMDD.HHMM"** or **"bview.YYYYMMDD.HHMM"**. e.g. **"rib.20170222.1600"**, **"bview.20170222.1600"**
 > - **UPDATES Directory:** Directory in which **UPDATES** files are stored. Name of this directory must be "UPDATES".
-    > ~ File name of a **UPDATES** file must be in format **"updates.YYYYMMDD.HHMM"**. e.g. **"updates.20170222.1600"**
+<br> - File name of a **UPDATES** file must be in format **"updates.YYYYMMDD.HHMM"**. e.g. **"updates.20170222.1600"**
 
 > **RIB** and **UPDATES** files can have **.gzip**, **.bz2** and **.gz** file format extensions in their file names. e.g. "rib.20170222.1600.gzip", "rib.20170222.1600.bz2", "updates.20170222.1600.gz"
 
@@ -135,3 +135,4 @@ OPTIONS:
 Configuration is in YAML format via the **openbmp-mrt2bmp.yml** file.  See the file for details.
 
 > ** You should provide **directory paths** that are **writable** by the consumer.
+
