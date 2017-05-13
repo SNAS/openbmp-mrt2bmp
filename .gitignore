@@ -11,3 +11,7 @@ src/site-packages/openbmp/mrt2bmp/logger.pyc
 src/site-packages/openbmp/mrt2bmp/CollectorSender.pyc
 src/site-packages/openbmp/mrt2bmp/HelperClasses.pyc
 src/site-packages/openbmp/mrt2bmp/MrtProcessors.pyc
+build/
+src/bin/processed_data/
+src/bin/router_data/
+src/site-packages/openbmp/mrt2bmp/RipeSynchronizer.pyc
