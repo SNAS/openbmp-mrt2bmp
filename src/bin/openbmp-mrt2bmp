@@ -122,6 +122,8 @@ def usage(prog):
     print "  -r, --router".ljust(30) + "Router name which you want to run with your MRT files"
     print "  --rv, --routeviews".ljust(30) + "Router name which you want to run from routeviews.org"
     print "  --rv list, --routeviews list".ljust(30) + "Print name of routers from routeviews.org"
+    print "  --rp, --ripe".ljust(30) + "Router name which you want to run from RIPE"
+    print "  --rp list, --ripe list".ljust(30) + "Print name of routers from RIPE"
     print ""
 
 def parse_cmd_args(argv):
@@ -229,9 +231,6 @@ def parse_cmd_args(argv):
 
 
 def main():
-
-    print "Openbmp Mrt2Bmp is started"
-
     """ Main entry point """
     global LOG, RUNNING
 
