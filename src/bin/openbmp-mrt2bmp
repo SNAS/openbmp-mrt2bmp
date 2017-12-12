@@ -183,10 +183,11 @@ def parse_cmd_args(argv):
             elif o in ("--rp", "--ripe"):
 
                 print "Ripe is chosen..."
+                list_of_routers = []
 
-                list_of_routers = RipeSynchronizer.getListOfRouters("https://www.ripe.net/analyse/internet-measurements/routing-information-service-ris/ris-raw-data")
+                if a[:5] == "list-":
+                    list_of_routers = RipeSynchronizer.getListOfRouters(a[5:])
 
-                if a == "list":
                     # Print list of routers from routeviews.org
                     print "List of routers from ripe.net"
 
@@ -196,16 +197,6 @@ def parse_cmd_args(argv):
                     sys.exit(0)
 
                 else:
-                    router_exists = False
-
-                    for r, k in list_of_routers:
-                        if r == a:
-                            router_exists = True
-
-                    if not router_exists:
-                        print("'%s' is not a valid router on ripe.net" % a)
-                        sys.exit(2)
-
                     cfg['router_name'] = a
                     USE_RIPE = True
 
